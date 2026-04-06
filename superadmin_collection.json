@@ -1,0 +1,5774 @@
+{
+  "info": {
+    "_postman_id": "d09f5a71-de7f-4231-9c8c-c7830ffad4fe",
+    "name": "SuperAdmin Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "45659025",
+    "_collection_link": "https://go.postman.co/collection/45659025-d09f5a71-de7f-4231-9c8c-c7830ffad4fe?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "SuperAdmin",
+      "item": [
+        {
+          "name": "auth",
+          "item": [
+            {
+              "name": "admin/login",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "if (pm.response.code === 200 || pm.response.code === 201) {",
+                      "    try {",
+                      "        const jsonData = pm.response.json();",
+                      "        if (jsonData.validation_token) {",
+                      "            pm.environment.set(\"authorization_token\", jsonData.validation_token);",
+                      "            console.log(\"Token saved:\", jsonData.validation_token);",
+                      "        } else {",
+                      "            console.log(\"validation_token not found in response\");",
+                      "        }",
+                      "    } catch (e) {",
+                      "        console.error(\"Error parsing JSON:\", e);",
+                      "    }",
+                      "} else {",
+                      "    console.log(\"Response code is not 200 or 201:\", pm.response.code);",
+                      "}",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"phone\":\"+9779807592153\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/auth/superAdmin/login",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "superAdmin",
+                    "login"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "adminVerifyPhone",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "if (pm.response.code === 200 || pm.response.code === 201) {",
+                      "    try {",
+                      "        const jsonData = pm.response.json();",
+                      "        if (jsonData.data && jsonData.data.access_token) {",
+                      "            pm.environment.set(\"authorization_token\", jsonData.data.access_token);",
+                      "            console.log(\"access_token saved:\", jsonData.data.access_token);",
+                      "        } else {",
+                      "            console.log(\"access_token not found in response\");",
+                      "        }",
+                      "",
+                      "        if (jsonData.data && jsonData.data.refresh_token) {",
+                      "            pm.environment.set(\"refresh_token\", jsonData.data.refresh_token);",
+                      "            console.log(\"refresh_token saved:\", jsonData.data.refresh_token);",
+                      "        } else {",
+                      "            console.log(\"refresh_token not found in response\");",
+                      "        }",
+                      "    } catch (e) {",
+                      "        console.error(\"Error parsing JSON:\", e);",
+                      "    }",
+                      "} else {",
+                      "    console.log(\"Response code is not 200 or 201:\", pm.response.code);",
+                      "}",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n   \"validation_token\": \"{{authorization_token}}\",\n     \"otp\":1234\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/auth/superAdmin/verifyPhone",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "superAdmin",
+                    "verifyPhone"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "refresh",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "if (pm.response.code === 200 || pm.response.code === 201) {",
+                      "    try {",
+                      "        const jsonData = pm.response.json();",
+                      "        if (jsonData.data && jsonData.data.access_token) {",
+                      "            pm.environment.set(\"authorization_token\", jsonData.data.access_token);",
+                      "            console.log(\"access_token saved:\", jsonData.data.access_token);",
+                      "        } else {",
+                      "            console.log(\"access_token not found in response\");",
+                      "        }",
+                      "",
+                      "        if (jsonData.data && jsonData.data.refresh_token) {",
+                      "            pm.environment.set(\"refresh_token\", jsonData.data.refresh_token);",
+                      "            console.log(\"refresh_token saved:\", jsonData.data.refresh_token);",
+                      "        } else {",
+                      "            console.log(\"refresh_token not found in response\");",
+                      "        }",
+                      "    } catch (e) {",
+                      "        console.error(\"Error parsing JSON:\", e);",
+                      "    }",
+                      "} else {",
+                      "    console.log(\"Response code is not 200 or 201:\", pm.response.code);",
+                      "}",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n      \"refreshToken\": \"{{refresh_token}}\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/auth/superAdmin/refresh",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "superAdmin",
+                    "refresh"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "previllages",
+          "item": [
+            {
+              "name": "admin-allowlist/invite",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phone\": \"+9779807592154\",\n  \"name\": \"Ayush\",\n  \"role\": \"SuperAdmin\",\n  \"permissions\": [\n    { \"page\": \"DASHBOARD\", \"canView\": true, \"canEdit\": false },\n    { \"page\": \"USERS\", \"canView\": true, \"canEdit\": true },\n    { \"page\": \"ADS\", \"canView\": true, \"canEdit\": false }\n  ]\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/admin-allowlist/invite",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "admin-allowlist",
+                    "invite"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update-subAdmin-status",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"status\":false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/admin-allowlist/update-subadmin-status/37",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "admin-allowlist",
+                    "update-subadmin-status",
+                    "37"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "resend-verification-token",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"phone\": \"+9779807592150\" }\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/admin-allowlist/resend-otp",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "admin-allowlist",
+                    "resend-otp"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "verify-allow-list-otp",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"phone\": \"+9779807592154\", \"otp\": \"475385\" }\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/admin-allowlist/verify",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "admin-allowlist",
+                    "verify"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Admin-allow-list",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/admin-allowlist?status=active",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "admin-allowlist"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "active"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "toggle-status",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \"isActive\": true }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/admin-allowlist/2/active",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "admin-allowlist",
+                    "2",
+                    "active"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Permissions-post",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"permissions\": [\n    { \"page\": \"DASHBOARD\", \"canView\": true, \"canEdit\": false },\n    { \"page\": \"USERS\", \"canView\": true, \"canEdit\": true },\n    { \"page\": \"REVIEWS\", \"canView\": true, \"canEdit\": false },\n    { \"page\": \"SETTINGS\", \"canView\": true, \"canEdit\": true },\n    { \"page\": \"ADS\", \"canView\": true, \"canEdit\": true }\n  ]\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/admin-allowlist/users/37/permissions",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "admin-allowlist",
+                    "users",
+                    "37",
+                    "permissions"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "my-previllages",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/admin-allowlist/mine/previllages",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "admin-allowlist",
+                    "mine",
+                    "previllages"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "my-subAdmin-previllages",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/admin-allowlist/get-previllages/5",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "admin-allowlist",
+                    "get-previllages",
+                    "5"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "userWaller",
+          "item": [
+            {
+              "name": "historyById",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/wallet/2/history",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "wallet",
+                    "2",
+                    "history"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "historyByAnayticsMatrics",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{base_url}}/wallet/2/historyAnalysis?metric=yearly",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "wallet",
+                    "2",
+                    "historyAnalysis"
+                  ],
+                  "query": [
+                    {
+                      "key": "metric",
+                      "value": "yearly"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "user",
+          "item": [
+            {
+              "name": "me",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/user/me",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "user",
+                    "me"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "editme",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n \"user_name\": \"Rambahadur\", \n//   \"first_name\": \"Ram\",\n//   \"last_name\": \"bahadur\",\n//   \"email\": \"email1@gmail.com\",\n//   \"age\": 12,\n//   \"date_of_birth\": \"1993-09-16\",\n//   \"secondary_phone\": \"+9779807592153\",\n//   \"profile_url\":\"aas.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/user/editinfo",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "user",
+                    "editinfo"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "verifyPublicUser",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/user/verify/public/2",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "user",
+                    "verify",
+                    "public",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Vendor-profile-request",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/vendor/metrics/vendor-profile-request-list?state=approved",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "vendor",
+                    "metrics",
+                    "vendor-profile-request-list"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "2025-09-16 10:02:30.695",
+                      "disabled": true
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-09-19 10:02:30.695",
+                      "disabled": true
+                    },
+                    {
+                      "key": "plan",
+                      "value": "PLATENIUM",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "businessName",
+                      "value": "Bajeko",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "gender",
+                      "value": "female",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "userId",
+                      "value": "16",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "2025-09-21T12:16:10.893Z_2",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "state",
+                      "value": "approved"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update-status of admin",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"state\":true\n\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/user/update-admin-status/63",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "user",
+                    "update-admin-status",
+                    "63"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "@Get('getAllPublicUsers')",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{base_url}}/user/getAllPublicUsers?limit=5&cursor=",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "user",
+                    "getAllPublicUsers"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "5"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "unverify-user",
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/user/unverify/public/4",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "user",
+                    "unverify",
+                    "public",
+                    "4"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "getUserById",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/user/getUserById/4",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "user",
+                    "getUserById",
+                    "4"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "getVendors",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/user/getAllVendors",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "user",
+                    "getAllVendors"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "vendors",
+          "item": [
+            {
+              "name": "get-all-vendors-with-pagination",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/user/getAllVendors?verified=false",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "user",
+                    "getAllVendors"
+                  ],
+                  "query": [
+                    {
+                      "key": "verified",
+                      "value": "false"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "delete-vendor",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/user/delete-vendor/9",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "user",
+                    "delete-vendor",
+                    "9"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "dashboard-metrics",
+          "item": [
+            {
+              "name": "Super-admin",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/SuperAdmin/dashboard?fromDate=2025-10-09T00:00:00.000Z&toDate=2025-10-16T00:00:00.000Z",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "SuperAdmin",
+                    "dashboard"
+                  ],
+                  "query": [
+                    {
+                      "key": "dwmqy",
+                      "value": "WEEKLY",
+                      "disabled": true
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "2025-10-09T00:00:00.000Z"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-10-16T00:00:00.000Z"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UsersSingin/Login",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/SuperAdmin/dashboard/userlogin",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "SuperAdmin",
+                    "dashboard",
+                    "userlogin"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "2025-09-13 10:47:05.072",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-09-14 11:06:19.268",
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Subscription rate",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "qwdy",
+                    "value": "",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/SuperAdmin/dashboard/subscriptionrate",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "SuperAdmin",
+                    "dashboard",
+                    "subscriptionrate"
+                  ],
+                  "query": [
+                    {
+                      "key": "dwmqy",
+                      "value": "WEEKLY",
+                      "disabled": true
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "2025-09-14 11:46:27.547",
+                      "disabled": true
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-12-31 11:46:27.547",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Gender Demographic",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/SuperAdmin/dashboard/gender?fromDate=2025-09-10 12:01:52.657&toDate=2025-09-19 12:01:52.657",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "SuperAdmin",
+                    "dashboard",
+                    "gender"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "2025-09-10 12:01:52.657"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-09-19 12:01:52.657"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Top Active Users",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/SuperAdmin/dashboard/topactiveusers?pageSize=3&limit=3&cursor=122_8",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "SuperAdmin",
+                    "dashboard",
+                    "topactiveusers"
+                  ],
+                  "query": [
+                    {
+                      "key": "plan",
+                      "value": "PREMIUM",
+                      "disabled": true
+                    },
+                    {
+                      "key": "dwmqy",
+                      "value": "DAILY",
+                      "disabled": true
+                    },
+                    {
+                      "key": "gender",
+                      "value": "male",
+                      "disabled": true
+                    },
+                    {
+                      "key": "search",
+                      "value": "Roshan Bahadur",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "2025-08-22 05:48:17.752",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-08-24 05:48:17.752",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "1",
+                      "disabled": true
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "3"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "3"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "122_8"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Total-Revenue",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/SuperAdmin/dashboard/totalrevenue?dwmqy=MONTHLY",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "SuperAdmin",
+                    "dashboard",
+                    "totalrevenue"
+                  ],
+                  "query": [
+                    {
+                      "key": "dwmqy",
+                      "value": "MONTHLY"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "2025-08-20 05:48:17.752",
+                      "disabled": true
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-08-24 05:48:17.752",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "SuperAdminKPIS",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/superadmin/dashboard",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "superadmin",
+                    "dashboard"
+                  ],
+                  "query": [
+                    {
+                      "key": "dwmqy",
+                      "value": "WEEKLY",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ActiveUserDetails",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/superadmin/dashboard/details-of-users/7",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "superadmin",
+                    "dashboard",
+                    "details-of-users",
+                    "7"
+                  ],
+                  "query": [
+                    {
+                      "key": "dwmqy",
+                      "value": "WEEKLY",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Reported By details",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/superadmin/dashboard/details-of-users/7",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "superadmin",
+                    "dashboard",
+                    "details-of-users",
+                    "7"
+                  ],
+                  "query": [
+                    {
+                      "key": "dwmqy",
+                      "value": "WEEKLY",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get all the Reports By the ReportedBy",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Superadmin/dashboard/details-of-ReportedBy/7?fromDate=2025-09-07T12:54:39.954Z&toDate=2025-09-11T12:54:39.954Z",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Superadmin",
+                    "dashboard",
+                    "details-of-ReportedBy",
+                    "7"
+                  ],
+                  "query": [
+                    {
+                      "key": "dwmqy",
+                      "value": "WEEKLY",
+                      "disabled": true
+                    },
+                    {
+                      "key": "type",
+                      "value": "profile",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "2025-09-07T12:54:39.954Z"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-09-11T12:54:39.954Z"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get all the Reports By the ReportedTo",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Superadmin/dashboard/details-of-ReportedTo/7",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Superadmin",
+                    "dashboard",
+                    "details-of-ReportedTo",
+                    "7"
+                  ],
+                  "query": [
+                    {
+                      "key": "dwmqy",
+                      "value": "WEEKLY",
+                      "disabled": true
+                    },
+                    {
+                      "key": "type",
+                      "value": "profile",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "2025-09-07T12:54:39.954Z",
+                      "disabled": true
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-09-11T12:54:39.954Z",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get the Screen Usage per Person",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Superadmin/dashboard/total-screen-time-users/7",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Superadmin",
+                    "dashboard",
+                    "total-screen-time-users",
+                    "7"
+                  ],
+                  "query": [
+                    {
+                      "key": "dwmqy",
+                      "value": "DAILY",
+                      "disabled": true
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "2025-08-07T12:54:39.954Z",
+                      "disabled": true
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-09-14T12:54:39.954Z",
+                      "disabled": true
+                    },
+                    {
+                      "key": "device",
+                      "value": "iosSecond",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "device",
+                      "value": "ios",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "All Feature used by Top Active User",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Superadmin/dashboard/total-features-used-by-top-active-users/8?fromDate=2025-09-12T12:54:39.954Z&toDate=2025-09-15T12:54:39.954Z",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Superadmin",
+                    "dashboard",
+                    "total-features-used-by-top-active-users",
+                    "8"
+                  ],
+                  "query": [
+                    {
+                      "key": "dwmqy",
+                      "value": "WEEKLY",
+                      "disabled": true
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "2025-09-12T12:54:39.954Z"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-09-15T12:54:39.954Z"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "premium",
+          "item": [
+            {
+              "name": "create new plan",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"code\": \"PLATENIUM\",\n  \"name\": \"Platenium Plan\",\n  \"isActive\": true,\n  \"priceMonthly\":3000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/super-admin/entitlements/plans",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "super-admin",
+                    "entitlements",
+                    "plans"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "delete dangling plans",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"code\": \"PLATENIUM\",\n  \"name\": \"Platenium Plan\",\n  \"isActive\": true,\n  \"priceMonthly\":3000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/super-admin/entitlements/plans/PLATENIUM PRO MAX",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "super-admin",
+                    "entitlements",
+                    "plans",
+                    "PLATENIUM PRO MAX"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update-plan",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isActive\": true,\n  \"priceMonthly\": 2400\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/super-admin/entitlements/plans/SILVER",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "super-admin",
+                    "entitlements",
+                    "plans",
+                    "SILVER"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update-plan-pricing",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"isActive\": true,\n  \"priceMonthly\": 2400\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/super-admin/entitlements/plans/SILVER",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "super-admin",
+                    "entitlements",
+                    "plans",
+                    "SILVER"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Bulk-update-plan-pricing",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "// [\n//   { \"scope\": \"MONTHLY\", \"isActive\": false },\n//   { \"scope\": \"YEARLY\", \"isActive\": false }\n// ]\n\n\n[\n  {\n    \"scope\": \"MONTHLY\",\n    \"priceCents\": 599,\n    \"currency\": \"USD\",\n    \"isActive\": true\n  },\n  {\n    \"scope\": \"YEARLY\",\n    \"priceCents\": 4999,\n    \"currency\": \"USD\",\n    \"trialDays\": 14,\n    \"isActive\":true\n  }\n]\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/super-admin/entitlements/plans-pricings-update/PLATINUM",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "super-admin",
+                    "entitlements",
+                    "plans-pricings-update",
+                    "PLATINUM"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "plan-features-bulk",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"features\": [\n    {\n      \"feature\": \"VIEW_WHO_LIKED\",\n      \"enabled\": true,\n      \"limit\": 100,\n      \"scope\": \"MONTH\"\n    },\n    {\n      \"feature\": \"VIEW_WHO_LIKED\",\n      \"enabled\": true,\n      \"limit\": 100,\n      \"scope\": \"MONTH\"\n    }\n  ]\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/super-admin/entitlements/plans/GOLD/features",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "super-admin",
+                    "entitlements",
+                    "plans",
+                    "GOLD",
+                    "features"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "plan-features-one",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\n    {\n      \"feature\": \"VIEW_WHO_LIKED\",\n      \"enabled\": true,\n      \"limit\": 40,\n      \"scope\": \"MONTH\"\n    }\n\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/super-admin/entitlements/plans/FREE/feature",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "super-admin",
+                    "entitlements",
+                    "plans",
+                    "FREE",
+                    "feature"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "permission-grant",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userId\": 13,\n  \"feature\": \"MESSAGE_WITHOUT_MATCH\",\n  \"enabled\": true,\n  \"limit\": 10,\n  \"scope\": \"DAY\",\n  \"reason\": \"promo\"\n//   \"expiresAt\": \"2025-12-31T23:59:59Z\"\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/super-admin/entitlements/grants",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "super-admin",
+                    "entitlements",
+                    "grants"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "PLAN-PRICING",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"scope\": \"MONTHLY\",\n  \"priceCents\": 99,\n  \"currency\": \"USD\",\n  \"trialDays\": 0,\n  \"isDefault\": true,\n  \"isActive\": true\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/super-admin/entitlements/plans/GOLD/pricing",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "super-admin",
+                    "entitlements",
+                    "plans",
+                    "GOLD",
+                    "pricing"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "PLAN-PRICING Bulk",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": [\n    {\n      \"scope\": \"WEEKLY\",\n      \"priceCents\": 99,\n      \"currency\": \"USD\",\n      \"trialDays\": 0,\n      \"isDefault\": true,\n      \"isActive\": true\n    },\n    {\n      \"scope\": \"MONTHLY\",\n      \"priceCents\": 299,\n      \"currency\": \"USD\",\n      \"trialDays\": 0,\n      \"isActive\": true\n    }\n  ]\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/super-admin/entitlements/plans/GOLD/pricings",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "super-admin",
+                    "entitlements",
+                    "plans",
+                    "GOLD",
+                    "pricings"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GET-PLANS",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/super-admin/entitlements/plans-with-pricings",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "super-admin",
+                    "entitlements",
+                    "plans-with-pricings"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "planfeature",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"phone\":\"+9779807592153\"\n}"
+                },
+                "url": {
+                  "raw": "{{base_url}}/super-admin/entitlements/plans/FREE/features",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "super-admin",
+                    "entitlements",
+                    "plans",
+                    "FREE",
+                    "features"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "subscribe",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planCode\": \"GOLD\",\n  \"scope\": \"MONTHLY\",\n  \"useTrial\": true\n} ",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/super-admin/entitlements/subscribe",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "super-admin",
+                    "entitlements",
+                    "subscribe"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "checkout",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planCode\": \"GOLD\",\n  \"scope\": \"MONTHLY\",\n  \"provider\": \"stripe\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/super-admin/entitlements/checkout",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "super-admin",
+                    "entitlements",
+                    "checkout"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "confirm subscriptions",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"paymentRowId\":\"3\",\n  \"status\": \"COMPLETED\",\n  \"providerRef\": \"pi_3Nz..._secret_abc\" // or esewa/khalti reference\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/super-admin/entitlements/confirm",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "super-admin",
+                    "entitlements",
+                    "confirm"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "get subscriptions",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/super-admin/entitlements/subscriptions",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "super-admin",
+                    "entitlements",
+                    "subscriptions"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Vendor Report page",
+          "item": [
+            {
+              "name": "REPORT",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "reason",
+                      "type": "text",
+                      "uuid": "b285cac4-0a66-404c-859e-3d74e09d559e",
+                      "value": "This is misinformation"
+                    },
+                    {
+                      "key": "category",
+                      "value": "SPAM_OR_SCAM",
+                      "type": "text",
+                      "uuid": "7a7ee603-aebd-407e-89e5-84c97b39da40"
+                    },
+                    {
+                      "key": "media",
+                      "type": "file",
+                      "uuid": "543ca3ce-7c74-4e58-ba28-c673bcae3908",
+                      "src": [
+                        "/Users/roshanchaudhary/Desktop/Screenshot 2025-08-12 at 22.45.31.png",
+                        "/Users/roshanchaudhary/Desktop/Screenshot 2025-06-06 at 19.46.09.png"
+                      ],
+                      "disabled": true
+                    },
+                    {
+                      "key": "reportCategoryType",
+                      "value": "USER",
+                      "type": "text",
+                      "uuid": "37ba5e89-9235-4005-868e-2ba02660b657"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{base_url}}/vendor/profile/report/7",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "vendor",
+                    "profile",
+                    "report",
+                    "7"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "get All Vendor Report Metrics",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{base_url}}/vendor/profile/reportmetrics?fromDate=2025-08-29 05:48:17.752&toDate=2025-09-01 05:48:17.752",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "vendor",
+                    "profile",
+                    "reportmetrics"
+                  ],
+                  "query": [
+                    {
+                      "key": "dwmqy",
+                      "value": "YEARLY",
+                      "disabled": true
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "2025-08-29 05:48:17.752"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-09-01 05:48:17.752"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "get Report By ReportId",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/vendor/profile/reportId/4",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "vendor",
+                    "profile",
+                    "reportId",
+                    "4"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "2025-05-19 05:48:17.752",
+                      "disabled": true
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-08-25 05:48:17.752",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Report Listings",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/vendor/profile/reportlistings",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "vendor",
+                    "profile",
+                    "reportlistings"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "2025-08-18 05:48:17.752",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-08-23 05:48:17.752",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "progress",
+                      "value": "UNDER_REVIEW",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "name",
+                      "value": "Momo",
+                      "disabled": true
+                    },
+                    {
+                      "key": "number",
+                      "value": "98",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2",
+                      "disabled": true
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "2025-08-20T11:23:52.036Z_4",
+                      "disabled": true
+                    },
+                    {
+                      "key": "",
+                      "value": "",
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Report Listings user profile",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/vendor/profile/user-profile-reportlistings",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "vendor",
+                    "profile",
+                    "user-profile-reportlistings"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "2025-08-18 05:48:17.752",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-08-23 05:48:17.752",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "progress",
+                      "value": "UNDER_REVIEW",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "name",
+                      "value": "Momo",
+                      "disabled": true
+                    },
+                    {
+                      "key": "number",
+                      "value": "98",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2",
+                      "disabled": true
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "2025-08-20T11:23:52.036Z_4",
+                      "disabled": true
+                    },
+                    {
+                      "key": "",
+                      "value": "",
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Report List Detail",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/vendor/profile/reportlistdetails/",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "vendor",
+                    "profile",
+                    "reportlistdetails",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update-report-status",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"updateStatus\": \"ESCALATED\",\n  \"superAdminNote\": \"Verified and resolved by team\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/vendor/profile/update-report-status-of-vendor/1",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "vendor",
+                    "profile",
+                    "update-report-status-of-vendor",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "bulk-update-report-status-of-vendor",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"updateStatus\": \"UNDER_REVIEW\",\n  \"superAdminNote\": \"Bulk reviewed\",\n  \"reportIds\": [14, 15]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/vendor/profile/bulk-update-report-status-of-vendor",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "vendor",
+                    "profile",
+                    "bulk-update-report-status-of-vendor"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "UserMetrics",
+          "item": [
+            {
+              "name": "UserMetrics",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/SuperAdmin/dashboard/user-performance-metrics?dwmqy=MONTHLY",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "SuperAdmin",
+                    "dashboard",
+                    "user-performance-metrics"
+                  ],
+                  "query": [
+                    {
+                      "key": "dwmqy",
+                      "value": "MONTHLY",
+                      "type": "text"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "2025-09-03 05:48:17.752",
+                      "disabled": true
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-09-04 05:48:17.752",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "user-performance-line-graphics",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/SuperAdmin/dashboard/user-performance-line-graphics?dwmqy=YEARLY",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "SuperAdmin",
+                    "dashboard",
+                    "user-performance-line-graphics"
+                  ],
+                  "query": [
+                    {
+                      "key": "dwmqy",
+                      "value": "YEARLY"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "User Age Gender Bar Graph",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/SuperAdmin/dashboard/user-age-gender-bargraph",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "SuperAdmin",
+                    "dashboard",
+                    "user-age-gender-bargraph"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "top-active-app-users",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/SuperAdmin/dashboard/top-active-app-users",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "SuperAdmin",
+                    "dashboard",
+                    "top-active-app-users"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "User-Gender-Demographic",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/SuperAdmin/dashboard/user-gender-demographic?fromDate=2025-09-04 08:58:41.785&toDate=2025-09-05 06:31:40.125",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "SuperAdmin",
+                    "dashboard",
+                    "user-gender-demographic"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "2025-09-04 08:58:41.785"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-09-05 06:31:40.125"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Total-Screen-Usage",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/SuperAdmin/dashboard/total-screen-time-app-users?dwmqy=YEARLY",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "SuperAdmin",
+                    "dashboard",
+                    "total-screen-time-app-users"
+                  ],
+                  "query": [
+                    {
+                      "key": "dwmqy",
+                      "value": "YEARLY"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "2025-11-02 09:00:00",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-11-06 09:00:00",
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Total-Screen-Usage-per-user",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/SuperAdmin/dashboard/user-total-screen-time/3",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "SuperAdmin",
+                    "dashboard",
+                    "user-total-screen-time",
+                    "3"
+                  ],
+                  "query": [
+                    {
+                      "key": "dwmqy",
+                      "value": "YEARLY",
+                      "disabled": true
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "2025-11-02 09:00:00",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-11-06 09:00:00",
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "User Login State",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/SuperAdmin/dashboard/userloginstats",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "SuperAdmin",
+                    "dashboard",
+                    "userloginstats"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "2025-07-03 09:00:00",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-07-06 09:00:00",
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "User-Mostly-Used-Features",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/SuperAdmin/dashboard/users-mostly-used-features",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "SuperAdmin",
+                    "dashboard",
+                    "users-mostly-used-features"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "2025-08-04 00:00:00",
+                      "disabled": true
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-08-05 00:00:00",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Profile Verification Badge",
+          "item": []
+        },
+        {
+          "name": "subscription metrices",
+          "item": [
+            {
+              "name": "user-subscription-line-graph",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/user/user-subscribe-line-graph?dwmqy=YEARLY",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "user",
+                    "user-subscribe-line-graph"
+                  ],
+                  "query": [
+                    {
+                      "key": "dwmqy",
+                      "value": "YEARLY"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "user-subscription-line-graph users",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/subscription/user-subscription-line-graph?dwmqy=WEEKLY",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "subscription",
+                    "user-subscription-line-graph"
+                  ],
+                  "query": [
+                    {
+                      "key": "dwmqy",
+                      "value": "WEEKLY"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "user-subscription-details",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/subscription/subscription-details-list/3",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "subscription",
+                    "subscription-details-list",
+                    "3"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "top-plans",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "fromDate",
+                    "value": "2024-09-13 07:04:02.596",
+                    "type": "text",
+                    "disabled": true
+                  },
+                  {
+                    "key": "toDate",
+                    "value": "2025-10-23 07:04:02.596",
+                    "type": "text",
+                    "disabled": true
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/subscription/admin/top-plans",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "subscription",
+                    "admin",
+                    "top-plans"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "subscription-kpis",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/subscription/admin/subscription-kpis?fromDate=2025-10-07 17:41:27.42&toDate=2025-10-11 17:41:27.42",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "subscription",
+                    "admin",
+                    "subscription-kpis"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "2025-10-07 17:41:27.42",
+                      "type": "text"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-10-11 17:41:27.42",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "subscriptions-by-location",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/subscription/admin/subscription-by-location",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "subscription",
+                    "admin",
+                    "subscription-by-location"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "subscriptions-list",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/subscription/subscription-user-list?fromDate=2025-10-05 11:11:27.511&toDate=2025-10-15 11:11:27.511",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "subscription",
+                    "subscription-user-list"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "Hari",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "gender",
+                      "value": "lesbian",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "plan",
+                      "value": "Silver",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "sort",
+                      "value": "oldest",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "2025-10-05 11:11:27.511",
+                      "type": "text"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-10-15 11:11:27.511",
+                      "type": "text"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "1",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "4",
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Swipping",
+          "item": [
+            {
+              "name": "Swiping Metrics",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/swipe/swiping-kpis-metrics?dwmqy=MONTHLY",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "swipe",
+                    "swiping-kpis-metrics"
+                  ],
+                  "query": [
+                    {
+                      "key": "dwmqy",
+                      "value": "MONTHLY",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "match rate by location",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/swipe/match-rate-by-location?fromDate=2025-09-23 07:04:02.596&toDate=2025-09-24 07:04:02.596",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "swipe",
+                    "match-rate-by-location"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "2025-09-23 07:04:02.596",
+                      "type": "text"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-09-24 07:04:02.596",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "profile-swipe-by-match",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/swipe/profile-swipe-by-matches",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "swipe",
+                    "profile-swipe-by-matches"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "2025-09-23 07:04:02.596",
+                      "disabled": true
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-09-25 07:04:02.596",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "swiping-list",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/swipe/swipping-list?sort=mostLike&limit=2&cursor=8",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "swipe",
+                    "swipping-list"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "2025-09-23 07:04:02.596",
+                      "disabled": true
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-09-25 07:04:02.596",
+                      "disabled": true
+                    },
+                    {
+                      "key": "gender",
+                      "value": "male",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "plan",
+                      "value": "Silver",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "search",
+                      "value": "3",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "sort",
+                      "value": "mostLike"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "8"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Subscription",
+          "item": [
+            {
+              "name": "Subscription-list",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/swipe/subscription-model-list?limit=2&cursor=14",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "swipe",
+                    "subscription-model-list"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "2025-09-19 17:15:20.636",
+                      "disabled": true
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-09-21 17:15:20.636",
+                      "disabled": true
+                    },
+                    {
+                      "key": "plan",
+                      "value": "Gold (Decoy)",
+                      "disabled": true
+                    },
+                    {
+                      "key": "highest",
+                      "value": "true",
+                      "disabled": true
+                    },
+                    {
+                      "key": "lowest",
+                      "value": "true",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "14"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "revenue-kpis",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/swipe/revenue-metrics-kpis?fromDate=2025-09-19 17:15:20.636&toDate=2025-09-25 17:15:20.636",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "swipe",
+                    "revenue-metrics-kpis"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "2025-09-19 17:15:20.636"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-09-25 17:15:20.636"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Personality",
+          "item": [
+            {
+              "name": "Personality Kpis",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/status-posts/peronality/kpis",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "status-posts",
+                    "peronality",
+                    "kpis"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Personality Post List",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/status-posts/personality-post-list?search=8",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "status-posts",
+                    "personality-post-list"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "2025-09-23 07:04:02.596",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-09-25 07:04:02.596",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "search",
+                      "value": "8",
+                      "type": "text"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "oldest",
+                      "disabled": true
+                    },
+                    {
+                      "key": "limit",
+                      "value": "2",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "73",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "match rate by the pages",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/status-posts/match-rate-by-pages?fromDate=2025-09-23 07:04:02.596&toDate=2025-09-27 07:04:02.596",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "status-posts",
+                    "match-rate-by-pages"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "2025-09-23 07:04:02.596"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-09-27 07:04:02.596"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "details of the personality",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/status-posts/details-of-the-post/2",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "status-posts",
+                    "details-of-the-post",
+                    "2"
+                  ],
+                  "query": [
+                    {
+                      "key": "fromDate",
+                      "value": "2025-09-23 07:04:02.596",
+                      "disabled": true
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-09-27 07:04:02.596",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Email",
+          "item": [
+            {
+              "name": "Fetch Users",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/email/fetch-users?role=PublicUser&gender=male&latitude=28.212910818644453&longitude=83.97536597597838&radius=500",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "email",
+                    "fetch-users"
+                  ],
+                  "query": [
+                    {
+                      "key": "role",
+                      "value": "PublicUser"
+                    },
+                    {
+                      "key": "gender",
+                      "value": "male"
+                    },
+                    {
+                      "key": "age",
+                      "value": "26-30",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "planName",
+                      "value": "Silver",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "28.212910818644453"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "83.97536597597838"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "500"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Send Email",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "image",
+                      "type": "file",
+                      "uuid": "a6a2e2b2-02e6-4863-a539-3c944c17a9a2",
+                      "src": "/Users/roshanchaudhary/Downloads/WhatsApp Image 2025-11-07 at 11.27.50.jpeg"
+                    },
+                    {
+                      "key": "message",
+                      "value": "Hello Hariom Vaii this is just the test email for you",
+                      "type": "text",
+                      "uuid": "9b86da8b-1fe3-4bd9-922c-24305cd90740"
+                    },
+                    {
+                      "key": "subject",
+                      "value": "Email Test (HARIOM  Sir )",
+                      "type": "text",
+                      "uuid": "3d3ce8a3-1b2c-4407-bf2c-0aa6b3b0520e"
+                    },
+                    {
+                      "key": "role",
+                      "value": "SuperAdmin",
+                      "type": "text",
+                      "uuid": "898a65f7-766e-49c6-8514-3a875c378799",
+                      "disabled": true
+                    },
+                    {
+                      "key": "role",
+                      "value": "PublicUser",
+                      "type": "text",
+                      "uuid": "fb525461-54ac-4c6d-8c2f-37abe8f80625"
+                    },
+                    {
+                      "key": "gender",
+                      "value": "MALE",
+                      "type": "text",
+                      "uuid": "e4e6a01f-bb98-4c73-bc14-407e7914017f"
+                    },
+                    {
+                      "key": "gender",
+                      "value": "FEMALE",
+                      "type": "text",
+                      "uuid": "91d478c6-2ee0-4db0-beb5-fa9cb852402c"
+                    },
+                    {
+                      "key": "age",
+                      "value": "24-30",
+                      "type": "text",
+                      "uuid": "298d38f9-f1cf-4753-b333-8cb1485c38fc"
+                    },
+                    {
+                      "key": "planName",
+                      "value": "FREE",
+                      "type": "text",
+                      "uuid": "b73ef3b3-1e1a-4334-811e-2d49b996ae5c"
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "27.68298708950334",
+                      "type": "text",
+                      "uuid": "a26825bc-e0c5-4528-8df7-cf3e85448960"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "85.39178633839278",
+                      "type": "text",
+                      "uuid": "a08d0ef3-20cf-4a25-8808-aae259a9281f"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "500",
+                      "type": "text",
+                      "uuid": "9a36fd37-e5ea-4843-9007-6e8ca71d258b"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{base_url}}/email/send-emails",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "email",
+                    "send-emails"
+                  ],
+                  "query": [
+                    {
+                      "key": "role",
+                      "value": "SuperAdmin",
+                      "disabled": true
+                    },
+                    {
+                      "key": "role",
+                      "value": "PublicUser",
+                      "disabled": true
+                    },
+                    {
+                      "key": "gender",
+                      "value": "FEMALE",
+                      "disabled": true
+                    },
+                    {
+                      "key": "gender",
+                      "value": "MALE",
+                      "disabled": true
+                    },
+                    {
+                      "key": "age",
+                      "value": "26-30",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "planName",
+                      "value": "FREE",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "28.212910818644453",
+                      "disabled": true
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "83.97536597597838",
+                      "disabled": true
+                    },
+                    {
+                      "key": "radius",
+                      "value": "500",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Schedule Emails",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "image",
+                      "type": "file",
+                      "uuid": "a6a2e2b2-02e6-4863-a539-3c944c17a9a2",
+                      "src": "/Users/roshanchaudhary/Desktop/Screenshot 2025-08-12 at 22.45.31.png"
+                    },
+                    {
+                      "key": "message",
+                      "value": "Hello EveryOne this is just the test email",
+                      "type": "text",
+                      "uuid": "9b86da8b-1fe3-4bd9-922c-24305cd90740"
+                    },
+                    {
+                      "key": "subject",
+                      "value": "Email Test",
+                      "type": "text",
+                      "uuid": "3d3ce8a3-1b2c-4407-bf2c-0aa6b3b0520e"
+                    },
+                    {
+                      "key": "schedule",
+                      "value": "2025-10-09T17:35:00+05:45",
+                      "type": "text",
+                      "uuid": "b9f32476-1a16-43b6-9e6c-23c9b7feda85"
+                    },
+                    {
+                      "key": "gender",
+                      "value": "MALE",
+                      "type": "text",
+                      "uuid": "373f7e57-2e91-40c7-9f2f-371bb79a31ae"
+                    },
+                    {
+                      "key": "gender",
+                      "value": "FEMALE",
+                      "type": "text",
+                      "uuid": "a024bb9c-e9e8-4daa-8fae-d045d2ca47bc"
+                    },
+                    {
+                      "key": "age",
+                      "value": "26-30",
+                      "type": "text",
+                      "uuid": "15d58d83-07b5-4081-973c-1fc9aa5c7b8a"
+                    },
+                    {
+                      "key": "planName",
+                      "value": "Silver",
+                      "type": "text",
+                      "uuid": "04bc9a2f-b7b0-4f28-a9fb-d4f13783482d"
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "longitude",
+                      "type": "text",
+                      "uuid": "6a38192f-b064-459e-9209-c395e7e35b4a"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "10",
+                      "type": "text",
+                      "uuid": "972fbb31-0587-4de4-a916-fbf8afd8c61c"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{base_url}}/email/schedule-emails?role=PublicUser&gender=male&latitude=28.212910818644453&longitude=83.97536597597838&radius=10",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "email",
+                    "schedule-emails"
+                  ],
+                  "query": [
+                    {
+                      "key": "role",
+                      "value": "PublicUser"
+                    },
+                    {
+                      "key": "gender",
+                      "value": "male"
+                    },
+                    {
+                      "key": "age",
+                      "value": "26-30",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "planName",
+                      "value": "Silver",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "latitude",
+                      "value": "28.212910818644453"
+                    },
+                    {
+                      "key": "longitude",
+                      "value": "83.97536597597838"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Basic Safety",
+          "item": [
+            {
+              "name": "create Basic Safety",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"title\":\"hello check\",\n    \"description\":\"Hello i am from Germany HamBurg\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/quiz/create-basic-safety",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "quiz",
+                    "create-basic-safety"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "create Bulk Basic Safety Copy",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"title\":\"hello check\",\n    \"description\":\"Hello i am from Germany HamBurg\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/quiz/create-basic-safety",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "quiz",
+                    "create-basic-safety"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "get all Basic Safety",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/quiz/get-all-basic-safety",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "quiz",
+                    "get-all-basic-safety"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "1",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "3",
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update  Basic Safety Info",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"title\":\"hello check first\",\n    \"description\":\"Hello i am from Germany HamBurg first\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/quiz/update-basic-safety/2",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "quiz",
+                    "update-basic-safety",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "delete  Basic Safety Info",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"title\":\"hello check first\",\n    \"description\":\"Hello i am from Germany HamBurg first\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/quiz/delete-basic-safety/2",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "quiz",
+                    "delete-basic-safety",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "QUIZ",
+          "item": [
+            {
+              "name": "Question",
+              "item": [
+                {
+                  "name": "Create Questions",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{authorization_token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"quizId\":2,\n  \"text\": \"Hello select test2 option\",\n  \"type\": \"MCQ\",\n  \"points\": 2,\n  \"options\": [\n    { \"text\": \"YES\", \"isCorrect\": false, \"description\":\"heelo this is wrong option\" },\n    { \"text\": \"NO\", \"isCorrect\": true }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/quiz/create/question",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "quiz",
+                        "create",
+                        "question"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Update Questions",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{authorization_token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PATCH",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"text\": \"Do You Love Me I am your soulmate?\"\n}\n",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/quiz/update/question/1?categoryId=2",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "quiz",
+                        "update",
+                        "question",
+                        "1"
+                      ],
+                      "query": [
+                        {
+                          "key": "categoryId",
+                          "value": "2"
+                        }
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Update Questions options",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{authorization_token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PATCH",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n\"description\": \"heelo this is wrong option\"  \n}\n",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/quiz/questions/1/options/2",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "quiz",
+                        "questions",
+                        "1",
+                        "options",
+                        "2"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Delete Questions",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{authorization_token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "DELETE",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/quiz/delete/question/2",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "quiz",
+                        "delete",
+                        "question",
+                        "2"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Get-All-Quiz-category-Questions",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{authorization_token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/quiz/get-all-quiz-by-category/2",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "quiz",
+                        "get-all-quiz-by-category",
+                        "2"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "1",
+                          "disabled": true
+                        },
+                        {
+                          "key": "cursor",
+                          "value": "4",
+                          "disabled": true
+                        }
+                      ]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            },
+            {
+              "name": "play",
+              "item": [
+                {
+                  "name": "startQuiz",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{authorization_token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n    \"quizId\":1\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/quiz/start/quiz",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "quiz",
+                        "start",
+                        "quiz"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "SubmitAnswer",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{authorization_token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"answers\": [\n    { \"questionId\": 1, \"selectedOptionIds\": [2] },\n    { \"questionId\": 2, \"selectedOptionIds\": [6] }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{base_url}}/quiz/attempt/6/submit",
+                      "host": [
+                        "{{base_url}}"
+                      ],
+                      "path": [
+                        "quiz",
+                        "attempt",
+                        "6",
+                        "submit"
+                      ]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            },
+            {
+              "name": "CREATE Quiz category",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Fire Safety Basics\",\n  \"description\": \"Learn the basics of fire prevention and safety.\",\n  \"category\": \"Fire Safety\",\n  \"difficulty\": \"Easy\",\n  \"passingMarks\": 70\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/quiz/createOrUpdate",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "quiz",
+                    "createOrUpdate"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get  Quiz KPIS",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Fire Safety Basics\",\n  \"description\": \"Learn the basics of fire prevention and safety.\",\n  \"category\": \"Fire Safety\",\n  \"difficulty\": \"Easy\",\n  \"passingMarks\": 70\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/quiz/get-all-quiz-kpis?dwmqy=WEEKLY&fromDate=2025-10-17 10:25:08.477&toDate=2025-10-19 16:16:14.368",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "quiz",
+                    "get-all-quiz-kpis"
+                  ],
+                  "query": [
+                    {
+                      "key": "dwmqy",
+                      "value": "WEEKLY"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "2025-10-17 10:25:08.477",
+                      "type": "text"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-10-19 16:16:14.368",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get-All-Quiz-list",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/quiz/quiz-list?sort=oldest",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "quiz",
+                    "quiz-list"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "1",
+                      "disabled": true
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "1",
+                      "disabled": true
+                    },
+                    {
+                      "key": "title",
+                      "value": null,
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "search",
+                      "value": "Harrasement",
+                      "disabled": true
+                    },
+                    {
+                      "key": "sort",
+                      "value": "oldest",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get-All-Quiz-list Details",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/quiz/quiz-list?sort=oldest",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "quiz",
+                    "quiz-list"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "1",
+                      "disabled": true
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "1",
+                      "disabled": true
+                    },
+                    {
+                      "key": "title",
+                      "value": null,
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "search",
+                      "value": "Harrasement",
+                      "disabled": true
+                    },
+                    {
+                      "key": "sort",
+                      "value": "oldest"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get  Quiz KPIS Copy",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Fire Safety Basics\",\n  \"description\": \"Learn the basics of fire prevention and safety.\",\n  \"category\": \"Fire Safety\",\n  \"difficulty\": \"Easy\",\n  \"passingMarks\": 70\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/quiz/get-all-quiz-kpis?dwmqy=WEEKLY&fromDate=2025-10-17 10:25:08.477&toDate=2025-10-19 16:16:14.368",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "quiz",
+                    "get-all-quiz-kpis"
+                  ],
+                  "query": [
+                    {
+                      "key": "dwmqy",
+                      "value": "WEEKLY"
+                    },
+                    {
+                      "key": "fromDate",
+                      "value": "2025-10-17 10:25:08.477",
+                      "type": "text"
+                    },
+                    {
+                      "key": "toDate",
+                      "value": "2025-10-19 16:16:14.368",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update-quiz-category",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \" Learn Fire Safety Basics\",\n  \"description\": \"Learn the basics of fire prevention and safety.\",\n  \"category\": \"Fire Safety\",\n  \"difficulty\": \"Easy\",\n  \"passingMarks\": 60\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/quiz/update-quiz/1",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "quiz",
+                    "update-quiz",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete-quiz-category",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/quiz/delete-quiz/1",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "quiz",
+                    "delete-quiz",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get-All-Quiz-category",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/quiz/get-all-quiz",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "quiz",
+                    "get-all-quiz"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "1",
+                      "disabled": true
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "1",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "reaction- assets",
+          "item": [
+            {
+              "name": "reaction create",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "media",
+                      "type": "file",
+                      "uuid": "923491bc-2595-4677-8ecb-892a5371ef00",
+                      "src": "/Users/roshanchaudhary/Desktop/Screen Recording 2025-10-08 at 14.55.28.mov"
+                    },
+                    {
+                      "key": "name",
+                      "value": "lor",
+                      "type": "text",
+                      "uuid": "50275087-cace-45f9-b835-7fe80cc44c8e"
+                    },
+                    {
+                      "key": "type",
+                      "value": "lor",
+                      "type": "text",
+                      "uuid": "1635cab5-4b59-4f72-b4ec-64f2688d8e3c"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{base_url}}/reactionasset/create",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "reactionasset",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update reaction",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "media",
+                      "type": "file",
+                      "uuid": "923491bc-2595-4677-8ecb-892a5371ef00",
+                      "src": "/Users/roshanchaudhary/Desktop/Screenshot 2025-08-12 at 22.45.31.png",
+                      "disabled": true
+                    },
+                    {
+                      "key": "name",
+                      "value": "sutta ",
+                      "type": "text",
+                      "uuid": "50275087-cace-45f9-b835-7fe80cc44c8e"
+                    },
+                    {
+                      "key": "type",
+                      "value": "sutta",
+                      "type": "text",
+                      "uuid": "1635cab5-4b59-4f72-b4ec-64f2688d8e3c"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{base_url}}/reactionasset/update/15",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "reactionasset",
+                    "update",
+                    "15"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "get all reactions",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "media",
+                      "type": "file",
+                      "uuid": "923491bc-2595-4677-8ecb-892a5371ef00",
+                      "src": "/Users/roshanchaudhary/Desktop/Screen Recording 2025-10-08 at 14.55.28.mov"
+                    },
+                    {
+                      "key": "name",
+                      "value": "lor",
+                      "type": "text",
+                      "uuid": "50275087-cace-45f9-b835-7fe80cc44c8e"
+                    },
+                    {
+                      "key": "type",
+                      "value": "lor",
+                      "type": "text",
+                      "uuid": "1635cab5-4b59-4f72-b4ec-64f2688d8e3c"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{base_url}}/reactionasset/get-all-reaction",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "reactionasset",
+                    "get-all-reaction"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "get reactions by ID",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "media",
+                      "type": "file",
+                      "uuid": "923491bc-2595-4677-8ecb-892a5371ef00",
+                      "src": "/Users/roshanchaudhary/Desktop/Screen Recording 2025-10-08 at 14.55.28.mov"
+                    },
+                    {
+                      "key": "name",
+                      "value": "lor",
+                      "type": "text",
+                      "uuid": "50275087-cace-45f9-b835-7fe80cc44c8e"
+                    },
+                    {
+                      "key": "type",
+                      "value": "lor",
+                      "type": "text",
+                      "uuid": "1635cab5-4b59-4f72-b4ec-64f2688d8e3c"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{base_url}}/reactionasset/get-reaction/8",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "reactionasset",
+                    "get-reaction",
+                    "8"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "get reactions by type",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"type\":\"jugnu\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/reactionasset/get-reaction-by-type",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "reactionasset",
+                    "get-reaction-by-type"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "delete reaction",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "media",
+                      "type": "file",
+                      "uuid": "923491bc-2595-4677-8ecb-892a5371ef00",
+                      "src": "/Users/roshanchaudhary/Desktop/Screen Recording 2025-10-08 at 14.55.28.mov"
+                    },
+                    {
+                      "key": "name",
+                      "value": "lor",
+                      "type": "text",
+                      "uuid": "50275087-cace-45f9-b835-7fe80cc44c8e"
+                    },
+                    {
+                      "key": "type",
+                      "value": "lor",
+                      "type": "text",
+                      "uuid": "1635cab5-4b59-4f72-b4ec-64f2688d8e3c"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{base_url}}/reactionasset/delete/1",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "reactionasset",
+                    "delete",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "delete reaction in bulk",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "media",
+                      "type": "file",
+                      "uuid": "923491bc-2595-4677-8ecb-892a5371ef00",
+                      "src": "/Users/roshanchaudhary/Desktop/Screen Recording 2025-10-08 at 14.55.28.mov"
+                    },
+                    {
+                      "key": "name",
+                      "value": "lor",
+                      "type": "text",
+                      "uuid": "50275087-cace-45f9-b835-7fe80cc44c8e"
+                    },
+                    {
+                      "key": "type",
+                      "value": "lor",
+                      "type": "text",
+                      "uuid": "1635cab5-4b59-4f72-b4ec-64f2688d8e3c"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{base_url}}/reactionasset/delete/1",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "reactionasset",
+                    "delete",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Dynamic Notification Template",
+          "item": [
+            {
+              "name": "get template by event",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n   \"eventType\": \"NEW_USER\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/dynamic-app-notification/get-template",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "dynamic-app-notification",
+                    "get-template"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "get All template by Event",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/dynamic-app-notification/get-all-templates",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "dynamic-app-notification",
+                    "get-all-templates"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "create template for Event",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n   \"eventType\":\"STORY_REPORT_STATUS\",\n   \"title\":\"Story Update\",\n   \"message\":\"Your report on Story has been reviewed. New status: {{status}}.\",\n   \"criteria\":15\n\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/dynamic-app-notification/create-template",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "dynamic-app-notification",
+                    "create-template"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "update template for Event",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n//    \"eventType\": \"NEW_USER\",\n//    \"title\":\"Potential Match\",\n//    \"message\":\"A potential match joined near you \",\n//    \"criteria\":50\n\n\n//    \"eventType\":\"PROFILE_REPORT_STATUS\",\n//    \"title\":\"Profile Status Update\",\n//    \"message\":\"Your report has been reviewed. New status: {{status}}.\",\n   \"criteria\":30\n\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/dynamic-app-notification/update-template/PROFILE_REPORT_STATUS",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "dynamic-app-notification",
+                    "update-template",
+                    "PROFILE_REPORT_STATUS"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "music",
+          "item": [
+            {
+              "name": "add music",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "music",
+                      "type": "file",
+                      "uuid": "e9553bb0-ee2f-40ea-87d9-27565da27c23",
+                      "src": "/Users/roshanchaudhary/Downloads/The Breakup Song Full Video - ADHMRanbir, AnushkaArijit,Badshah,Jonita,NakashPritam - SonyMusicIndiaVEVO.mp3"
+                    },
+                    {
+                      "key": "title",
+                      "value": "Break up Song",
+                      "type": "text",
+                      "uuid": "a341051d-0b39-4ca1-a07e-ac699bfb23c6"
+                    },
+                    {
+                      "key": "artist",
+                      "value": "Dj Roshan",
+                      "type": "text",
+                      "uuid": "ef6e6f53-9932-410f-b3aa-93df7c394c53"
+                    },
+                    {
+                      "key": "thumbnail",
+                      "type": "file",
+                      "uuid": "6aa8a8e3-5838-4b7a-8137-f184a72e440b",
+                      "src": "/Users/roshanchaudhary/Downloads/imagesstest.jpeg"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{base_url}}/music/add",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "music",
+                    "add"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "delete music",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/music/2",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "music",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "get all musics",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/music/all",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "music",
+                    "all"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "1",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "4",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "search",
+                      "value": "koya hae khoya hae one",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "search music",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/music/search?query=khoya",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "music",
+                    "search"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "khoya",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "storyMusic",
+          "item": [
+            {
+              "name": "create clip",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{authorization_token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"musicId\": 4,\n  \"timeOffset\": 169,\n  \"timeDuration\": 15\n}\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/story-music/create",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "story-music",
+                    "create"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "authorization_token",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}
